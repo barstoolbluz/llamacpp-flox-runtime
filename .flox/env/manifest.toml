@@ -39,7 +39,7 @@ on-activate = '''
   export LLAMACPP_MODELS_DIR="${LLAMACPP_MODELS_DIR:-$FLOX_ENV_PROJECT/models}"
 
   # Server
-  export LLAMACPP_HOST="${LLAMACPP_HOST:-127.0.0.1}"
+  export LLAMACPP_HOST="${LLAMACPP_HOST:-0.0.0.0}"
   export LLAMACPP_PORT="${LLAMACPP_PORT:-8080}"
 
   # Engine tuning

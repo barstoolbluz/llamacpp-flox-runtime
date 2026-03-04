@@ -46,7 +46,7 @@ This environment works for both local development and production serving. Key di
 
 | Setting | Local dev | Production |
 |---------|-----------|------------|
-| `LLAMACPP_HOST` | `127.0.0.1` (default) | `0.0.0.0` (accept remote connections) |
+| `LLAMACPP_HOST` | `127.0.0.1` for local-only access | `0.0.0.0` (default) |
 | `LLAMACPP_API_KEY` | _(unset, no auth)_ | Set a strong token |
 | `LLAMACPP_PARALLEL` | `4` (default) | Tune to expected concurrency |
 | `LLAMACPP_CTX_SIZE` | `0` (model default) | Set explicitly for memory planning |
@@ -58,7 +58,6 @@ This environment works for both local development and production serving. Key di
 Production example:
 
 ```bash
-LLAMACPP_HOST=0.0.0.0 \
 LLAMACPP_API_KEY=sk-prod-secret-token \
 LLAMACPP_PARALLEL=16 \
 LLAMACPP_CTX_SIZE=8192 \
@@ -204,7 +203,7 @@ LLAMACPP_CTX_SIZE=8192 LLAMACPP_PARALLEL=8 flox activate --start-services
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `LLAMACPP_HOST` | `127.0.0.1` | Server bind address. Use `0.0.0.0` for production |
+| `LLAMACPP_HOST` | `0.0.0.0` | Server bind address. Use `127.0.0.1` for local-only access |
 | `LLAMACPP_PORT` | `8080` | Server listen port. Must be 1-65535 |
 
 ### Engine tuning
@@ -416,7 +415,7 @@ In dry-run mode (`LLAMACPP_DRY_RUN=1`), exit codes are `0`/`2`/`3`/`4` only (nev
 
 | Variable | Default | Validation | Description |
 |----------|---------|------------|-------------|
-| `LLAMACPP_HOST` | `127.0.0.1` | — | Bind address to check |
+| `LLAMACPP_HOST` | `0.0.0.0` | — | Bind address to check |
 | `LLAMACPP_PORT` | `8080` | Integer, 1-65535 | Port to check and reclaim |
 | `LLAMACPP_OWNER_REGEX` | _(built-in heuristic)_ | Valid regex | Regex to identify llama-server processes. Matched against comm, cmdline, and exe. See example below |
 | `LLAMACPP_OWNER_EXE_ALLOWLIST` | _(none)_ | Colon-separated paths | Exact exe paths treated as llama-server (e.g., `/opt/llama/bin/llama-server:/usr/bin/llama-server`) |
@@ -470,10 +469,10 @@ When `LLAMACPP_PREFLIGHT_JSON=1`, a single JSON object is printed to stdout. Hum
 Examples:
 
 ```json
-{"status":"ok","action":"noop","host":"127.0.0.1","port":8080,"dry_run":false,"gpu":{"checked":true,"available":true,"gpus":[{"index":0,"name":"NVIDIA GeForce RTX 5090","total_mib":32768,"free_mib":31500,"used_pct":3.9}],"warned":false}}
-{"status":"ok","action":"stopped","host":"127.0.0.1","port":8080,"dry_run":false,"pids":[12345],"gpu":{...}}
-{"status":"error","code":2,"reason":"port_owned_by_other_process","host":"127.0.0.1","port":8080,"dry_run":false,"pids":[5678]}
-{"status":"error","code":2,"reason":"systemd_socket_activation","host":"127.0.0.1","port":8080,"dry_run":false,"pids":[1],"socket_units":["llama.socket"]}
+{"status":"ok","action":"noop","host":"0.0.0.0","port":8080,"dry_run":false,"gpu":{"checked":true,"available":true,"gpus":[{"index":0,"name":"NVIDIA GeForce RTX 5090","total_mib":32768,"free_mib":31500,"used_pct":3.9}],"warned":false}}
+{"status":"ok","action":"stopped","host":"0.0.0.0","port":8080,"dry_run":false,"pids":[12345],"gpu":{...}}
+{"status":"error","code":2,"reason":"port_owned_by_other_process","host":"0.0.0.0","port":8080,"dry_run":false,"pids":[5678]}
+{"status":"error","code":2,"reason":"systemd_socket_activation","host":"0.0.0.0","port":8080,"dry_run":false,"pids":[1],"socket_units":["llama.socket"]}
 ```
 
 ### Locking
