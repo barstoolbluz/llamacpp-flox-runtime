@@ -1,0 +1,188 @@
+{
+  "lockfile-version": 1,
+  "manifest": {
+    "version": 1,
+    "install": {
+      "huggingface-hub": {
+        "pkg-path": "python312Packages.huggingface-hub"
+      },
+      "llama-cpp": {
+        "pkg-path": "flox-cuda/llama-cpp",
+        "systems": [
+          "x86_64-linux"
+        ]
+      }
+    },
+    "hook": {
+      "on-activate": "  # Model\n  export LLAMACPP_MODEL=\"${LLAMACPP_MODEL:-Meta-Llama-3.1-8B-Instruct-Q4_K_M}\"\n  export LLAMACPP_MODEL_ORG=\"${LLAMACPP_MODEL_ORG:-bartowski}\"\n  export LLAMACPP_MODEL_ID=\"${LLAMACPP_MODEL_ID:-bartowski/Meta-Llama-3.1-8B-Instruct-GGUF}\"\n  export LLAMACPP_MODEL_FILE=\"${LLAMACPP_MODEL_FILE:-Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf}\"\n  export LLAMACPP_QUANT=\"${LLAMACPP_QUANT:-Q4_K_M}\"\n  export LLAMACPP_MODEL_SOURCES=\"${LLAMACPP_MODEL_SOURCES:-local,hf-cache,hf-hub}\"\n  export LLAMACPP_MODELS_DIR=\"${LLAMACPP_MODELS_DIR:-$FLOX_ENV_PROJECT/models}\"\n\n  # Server\n  export LLAMACPP_HOST=\"${LLAMACPP_HOST:-127.0.0.1}\"\n  export LLAMACPP_PORT=\"${LLAMACPP_PORT:-8080}\"\n\n  # Engine tuning\n  export LLAMACPP_N_GPU_LAYERS=\"${LLAMACPP_N_GPU_LAYERS:-99}\"\n  export LLAMACPP_CTX_SIZE=\"${LLAMACPP_CTX_SIZE:-0}\"\n  export LLAMACPP_PARALLEL=\"${LLAMACPP_PARALLEL:-4}\"\n  export LLAMACPP_BATCH_SIZE=\"${LLAMACPP_BATCH_SIZE:-}\"\n  export LLAMACPP_UBATCH_SIZE=\"${LLAMACPP_UBATCH_SIZE:-}\"\n  export LLAMACPP_FLASH_ATTN=\"${LLAMACPP_FLASH_ATTN:-true}\"\n  export LLAMACPP_CONT_BATCHING=\"${LLAMACPP_CONT_BATCHING:-true}\"\n\n  # KV cache\n  export LLAMACPP_CACHE_TYPE_K=\"${LLAMACPP_CACHE_TYPE_K:-}\"\n  export LLAMACPP_CACHE_TYPE_V=\"${LLAMACPP_CACHE_TYPE_V:-}\"\n\n  # Multi-GPU\n  export LLAMACPP_SPLIT_MODE=\"${LLAMACPP_SPLIT_MODE:-}\"\n  export LLAMACPP_TENSOR_SPLIT=\"${LLAMACPP_TENSOR_SPLIT:-}\"\n  export LLAMACPP_MAIN_GPU=\"${LLAMACPP_MAIN_GPU:-}\"\n\n  # Serving\n  export LLAMACPP_ALIAS=\"${LLAMACPP_ALIAS:-}\"\n  export LLAMACPP_API_KEY=\"${LLAMACPP_API_KEY:-}\"\n  export LLAMACPP_METRICS=\"${LLAMACPP_METRICS:-true}\"\n  export LLAMACPP_JINJA=\"${LLAMACPP_JINJA:-true}\"\n  export LLAMACPP_CHAT_TEMPLATE=\"${LLAMACPP_CHAT_TEMPLATE:-}\"\n  export LLAMACPP_EMBEDDING=\"${LLAMACPP_EMBEDDING:-}\"\n  export LLAMACPP_WEBUI=\"${LLAMACPP_WEBUI:-false}\"\n  export LLAMACPP_REASONING_FORMAT=\"${LLAMACPP_REASONING_FORMAT:-}\"\n\n  # Misc\n  export LLAMACPP_THREADS=\"${LLAMACPP_THREADS:-}\"\n  export LLAMACPP_TIMEOUT=\"${LLAMACPP_TIMEOUT:-}\"\n\n  # Scripts (until llamacpp-flox-runtime package is built)\n  export PATH=\"/home/daedalus/dev/builds/build-llamacpp-flox-runtime/scripts:$PATH\"\n\n  mkdir -p \"$LLAMACPP_MODELS_DIR\"\n"
+    },
+    "profile": {},
+    "options": {},
+    "services": {
+      "llamacpp": {
+        "command": "llamacpp-preflight && llamacpp-resolve-model && llamacpp-serve"
+      }
+    }
+  },
+  "packages": [
+    {
+      "attr_path": "python312Packages.huggingface-hub",
+      "broken": false,
+      "derivation": "/nix/store/pwryxhayzgx7dzm9y49v5qxlp94dinqk-python3.12-huggingface-hub-0.35.3.drv",
+      "description": "Download and publish models and other files on the huggingface.co hub",
+      "install_id": "huggingface-hub",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=3e2499d5539c16d0d173ba53552a4ff8547f4539",
+      "name": "python3.12-huggingface-hub-0.35.3",
+      "pname": "huggingface-hub",
+      "rev": "3e2499d5539c16d0d173ba53552a4ff8547f4539",
+      "rev_count": 916364,
+      "rev_date": "2025-12-25T08:32:45Z",
+      "scrape_date": "2025-12-26T03:03:15.853718Z",
+      "stabilities": [
+        "unstable",
+        "staging",
+        "stable"
+      ],
+      "unfree": false,
+      "version": "0.35.3",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "dist": "/nix/store/gd3cqsc3c0y8gx3h6sn7d9g15g45jsmp-python3.12-huggingface-hub-0.35.3-dist",
+        "out": "/nix/store/bc70zvd4chjn5hmccxqvfhqc6ccsi3cv-python3.12-huggingface-hub-0.35.3"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "python312Packages.huggingface-hub",
+      "broken": false,
+      "derivation": "/nix/store/4s1029qab9mjw2hpfn9zi2cdhr918anw-python3.12-huggingface-hub-0.35.3.drv",
+      "description": "Download and publish models and other files on the huggingface.co hub",
+      "install_id": "huggingface-hub",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=3e2499d5539c16d0d173ba53552a4ff8547f4539",
+      "name": "python3.12-huggingface-hub-0.35.3",
+      "pname": "huggingface-hub",
+      "rev": "3e2499d5539c16d0d173ba53552a4ff8547f4539",
+      "rev_count": 916364,
+      "rev_date": "2025-12-25T08:32:45Z",
+      "scrape_date": "2025-12-26T03:19:56.236287Z",
+      "stabilities": [
+        "unstable",
+        "staging",
+        "stable"
+      ],
+      "unfree": false,
+      "version": "0.35.3",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "dist": "/nix/store/hz7sh90nhrbrmr96yqsss24mj5p1fq3l-python3.12-huggingface-hub-0.35.3-dist",
+        "out": "/nix/store/irmqbh51p199207383ng16dwnxn523nj-python3.12-huggingface-hub-0.35.3"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "python312Packages.huggingface-hub",
+      "broken": false,
+      "derivation": "/nix/store/3hfgh1w1jp29dgm5zrnwb39z4j3aa68i-python3.12-huggingface-hub-0.35.3.drv",
+      "description": "Download and publish models and other files on the huggingface.co hub",
+      "install_id": "huggingface-hub",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=3e2499d5539c16d0d173ba53552a4ff8547f4539",
+      "name": "python3.12-huggingface-hub-0.35.3",
+      "pname": "huggingface-hub",
+      "rev": "3e2499d5539c16d0d173ba53552a4ff8547f4539",
+      "rev_count": 916364,
+      "rev_date": "2025-12-25T08:32:45Z",
+      "scrape_date": "2025-12-26T03:35:40.672825Z",
+      "stabilities": [
+        "unstable",
+        "staging",
+        "stable"
+      ],
+      "unfree": false,
+      "version": "0.35.3",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "dist": "/nix/store/j238qhhjmfbgv97gq2apyf56lvkhvx3h-python3.12-huggingface-hub-0.35.3-dist",
+        "out": "/nix/store/ld59vsamipsy9g6xjgvnb32prr8hj8q9-python3.12-huggingface-hub-0.35.3"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "python312Packages.huggingface-hub",
+      "broken": false,
+      "derivation": "/nix/store/l0j701gn2wmc7bsnm7ncab2abziw9c2l-python3.12-huggingface-hub-0.35.3.drv",
+      "description": "Download and publish models and other files on the huggingface.co hub",
+      "install_id": "huggingface-hub",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=3e2499d5539c16d0d173ba53552a4ff8547f4539",
+      "name": "python3.12-huggingface-hub-0.35.3",
+      "pname": "huggingface-hub",
+      "rev": "3e2499d5539c16d0d173ba53552a4ff8547f4539",
+      "rev_count": 916364,
+      "rev_date": "2025-12-25T08:32:45Z",
+      "scrape_date": "2025-12-26T03:52:16.451428Z",
+      "stabilities": [
+        "unstable",
+        "staging",
+        "stable"
+      ],
+      "unfree": false,
+      "version": "0.35.3",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "dist": "/nix/store/p964cdjcidizvyn6hcfz62lm9156ig14-python3.12-huggingface-hub-0.35.3-dist",
+        "out": "/nix/store/0ya4bjxycanc5m1wraqmzxn8gzx99pva-python3.12-huggingface-hub-0.35.3"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "llama-cpp",
+      "broken": false,
+      "derivation": "/nix/store/fsqnllw0fa22xqzd2k9h33jzxcgj7pk0-llama-cpp-7527.drv",
+      "description": "Inference of Meta's LLaMA model (and others) in pure C/C++",
+      "install_id": "llama-cpp",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=3e2499d5539c16d0d173ba53552a4ff8547f4539",
+      "name": "llama-cpp-7527",
+      "pname": "llama-cpp",
+      "rev": "3e2499d5539c16d0d173ba53552a4ff8547f4539",
+      "rev_count": 916364,
+      "rev_date": "2025-12-25T08:32:45Z",
+      "scrape_date": "2026-03-04T13:07:22.725665620Z",
+      "stabilities": [
+        "unstable",
+        "staging",
+        "stable"
+      ],
+      "unfree": false,
+      "version": "7527",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/c4synapvlny6cixi7fvwjrw6dxnp56jy-llama-cpp-7527"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    }
+  ]
+}
