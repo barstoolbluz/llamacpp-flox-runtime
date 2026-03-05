@@ -100,7 +100,7 @@ llamacpp-preflight && llamacpp-resolve-model && llamacpp-serve
 │  │    Output: per-model .env file (mode 600)          │  │
 │  ├────────────────────────────────────────────────────┤  │
 │  │  llamacpp-serve                                    │  │
-│  │    Loads .env → validates → singleton lock → exec llama-server │  │
+│  │    Loads .env → validate → lock → exec llama-server│  │
 │  └────────────────────────────────────────────────────┘  │
 └──────────────────────────────────────────────────────────┘
 ```
@@ -203,8 +203,8 @@ LLAMACPP_CTX_SIZE=8192 LLAMACPP_PARALLEL=8 flox activate --start-services
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `LLAMACPP_HOST` | `0.0.0.0` | Server bind address. Use `127.0.0.1` for local-only access |
-| `LLAMACPP_PORT` | `8080` | Server listen port. Must be 1-65535 |
+| `LLAMACPP_HOST` | `0.0.0.0` | Server bind address, or unix socket path ending in `.sock`. Use `127.0.0.1` for local-only TCP access |
+| `LLAMACPP_PORT` | `8080` | Server listen port (TCP mode). Ports < 1024 rejected. Optional in unix socket mode |
 
 ### Engine tuning
 
@@ -212,11 +212,11 @@ LLAMACPP_CTX_SIZE=8192 LLAMACPP_PARALLEL=8 flox activate --start-services
 |----------|---------|----------|-------------|
 | `LLAMACPP_N_GPU_LAYERS` | `99` | `-ngl` | Number of layers to offload to GPU. `99` offloads everything (capped at model layer count). `0` for CPU-only |
 | `LLAMACPP_CTX_SIZE` | `0` | `-c` | Context window size in tokens. `0` uses the model's default. Non-negative integer |
-| `LLAMACPP_PARALLEL` | `4` | `-np` | Number of parallel inference slots (concurrent requests). Positive integer |
+| `LLAMACPP_PARALLEL` | `4` | `-np` | Number of parallel inference slots (concurrent requests). `-1` for auto, or any positive integer |
 | `LLAMACPP_BATCH_SIZE` | _(unset)_ | `-b` | Logical batch size for prompt processing. When unset, llama-server uses its default |
 | `LLAMACPP_UBATCH_SIZE` | _(unset)_ | `-ub` | Physical batch size (micro-batch). Controls GPU memory during prompt eval |
 | `LLAMACPP_FLASH_ATTN` | `true` | `-fa` | Flash attention. Accepts `true`/`false`/`1`/`0`/`yes`/`no`. Maps to `-fa on` or `-fa off` |
-| `LLAMACPP_CONT_BATCHING` | `true` | `--cont-batching` | Continuous batching (serve multiple requests simultaneously) |
+| `LLAMACPP_CONT_BATCHING` | `true` | `--cont-batching` / `--no-cont-batching` | Continuous batching (serve multiple requests simultaneously) |
 | `LLAMACPP_THREADS` | _(unset)_ | `-t` | CPU thread count. When unset, llama-server auto-detects |
 | `LLAMACPP_TIMEOUT` | _(unset)_ | `-to` | Server timeout in seconds |
 
